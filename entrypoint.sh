@@ -26,15 +26,15 @@ else
 
     if [ "${PULL_REQUEST_TARGET_REPO}" != "${PULL_REQUEST_SOURCE_REPO}" ]; then
     # pull request is from fork
+        echo "Running steps for PR from fork"
         git config --global user.email "pint@fakemail.com"
         git config --global user.name "pint"
         git config pull.rebase false
         # # https://github.com/reg-viz/reg-suit#workaround-for-detached-head
         # # https://github.com/reg-viz/reg-suit/issues/590#issuecomment-1219155722
         # workaround for detached head
-        git checkout ${PRBRANCH}
-        git branch --set-upstream-to=origin/main ${PRBRANCH}
-
+        git checkout ${GITHUB_HEAD_REF#refs/heads/}
+        git branch --set-upstream-to=origin/main ${GITHUB_HEAD_REF}
         git pull
 
         # populate a local main branch with upstream data
@@ -42,10 +42,10 @@ else
         git branch main
         git reset --hard remotes/origin/main
         git remote -v
+        git pull origin main
 
         # go back to our fork branch
-        # git checkout ${GITHUB_HEAD_REF#refs/heads/}
-        git checkout "$PRBRANCH"
+        git checkout ${GITHUB_HEAD_REF#refs/heads/}
     else
     # pull request is not from fork
 
