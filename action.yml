@@ -27,7 +27,17 @@ inputs:
     description: "Require all rules to have an owner set via comment"
     required: false
     default: ""
-    
+  # TODO update these
+  pr_target_repo:
+    description: "target repo to PR"
+    required: false
+    default: ""
+  pr_source_repo:
+    description: "source repo from PR"
+    required: false
+    default: ""
+
+
 runs:
   using: "docker"
   image: "Dockerfile"
@@ -38,5 +48,5 @@ runs:
     LOGLEVEL: ${{ inputs.loglevel }}
     MIN_SEVERITY: ${{ inputs.minSeverity }}
     REQUIRE_OWNER: ${{ inputs.requireOwner }}
-    PULL_REQUEST_TARGET_REPO: ${{ github.event.pull_request.base.repo.full_name }}
-    PULL_REQUEST_SOURCE_REPO: ${{ github.event.pull_request.head.repo.full_name }}
+    PULL_REQUEST_TARGET_REPO: ${{ inputs.pr_target_repo }}
+    PULL_REQUEST_SOURCE_REPO: ${{ inputs.pr_source_repo }}
