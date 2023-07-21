@@ -27,13 +27,12 @@ inputs:
     description: "Require all rules to have an owner set via comment"
     required: false
     default: ""
-  # TODO update these
   pr_target_repo:
-    description: "target repo to PR"
+    description: "Required for pull requests from forks - target PR repository"
     required: false
     default: ""
   pr_source_repo:
-    description: "source repo from PR"
+    description: "Required for pull requests from forks - source PR repository"
     required: false
     default: ""
 
