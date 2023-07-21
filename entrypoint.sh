@@ -34,15 +34,16 @@ else
         # # https://github.com/reg-viz/reg-suit/issues/590#issuecomment-1219155722
         # workaround for detached head
         git checkout ${GITHUB_HEAD_REF#refs/heads/}
-        git branch --set-upstream-to=origin/main ${GITHUB_HEAD_REF}
+        git branch --set-upstream-to=origin/master ${GITHUB_HEAD_REF}
         git pull
 
         # populate a local main branch with upstream data
-        git checkout remotes/origin/main
+        # TODO make master/main configurable
+        git checkout remotes/origin/master
         git branch main
-        git reset --hard remotes/origin/main
+        git reset --hard remotes/origin/master
         git remote -v
-        git pull origin main
+        git pull origin master
 
         # go back to our fork branch
         git checkout ${GITHUB_HEAD_REF#refs/heads/}
