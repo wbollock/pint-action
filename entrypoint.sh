@@ -40,14 +40,14 @@ else
         # populate a local main branch with upstream data
         # TODO make master/main configurable
         git checkout remotes/origin/master
-        git branch main
+        git branch master
         git reset --hard remotes/origin/master
         git remote -v
         git pull origin master
 
         # go back to our fork branch
         git checkout ${GITHUB_HEAD_REF#refs/heads/}
-        pint $CONFIG $LOGLEVEL $CMD $REQUIRE_OWNER
+        pint $CONFIG $LOGLEVEL $CMD --base-branch="master" $REQUIRE_OWNER
     else
     # pull request is not from fork
 
