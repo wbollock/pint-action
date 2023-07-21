@@ -33,7 +33,7 @@ else
         # # https://github.com/reg-viz/reg-suit#workaround-for-detached-head
         # # https://github.com/reg-viz/reg-suit/issues/590#issuecomment-1219155722
         # workaround for detached head
-        git checkout ${GITHUB_HEAD_REF#refs/heads/}
+        git checkout ${GITHUB_HEAD_REF#refs/heads/} || git checkout -b ${GITHUB_HEAD_REF#refs/heads/}
         git branch --set-upstream-to=origin/master ${GITHUB_HEAD_REF}
         git pull
 
