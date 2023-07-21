@@ -47,6 +47,7 @@ else
 
         # go back to our fork branch
         git checkout ${GITHUB_HEAD_REF#refs/heads/}
+        pint $CONFIG $LOGLEVEL $CMD $REQUIRE_OWNER
     else
     # pull request is not from fork
 
@@ -60,7 +61,8 @@ else
       git checkout "$BASEBRANCH"
       git fetch origin "$PRBRANCH"
       git checkout "$PRBRANCH"
+      pint $CONFIG $LOGLEVEL $CMD --base-branch="$BASEBRANCH" $REQUIRE_OWNER
     fi
-    pint $CONFIG $LOGLEVEL $CMD --base-branch="$BASEBRANCH" $REQUIRE_OWNER
+
 
 fi
